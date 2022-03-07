@@ -22,6 +22,8 @@ Gem::Specification.new do |spec|
   # since this would cause a circular dependency
 
   # spec.add_dependency 'your-dependency', '~> 1.0.0'
+  
+  spec.add_dependency 'googleauth', '~> 1.1.2'
 
   spec.add_development_dependency('bundler')
   spec.add_development_dependency('fastlane', '>= 2.200.0')
