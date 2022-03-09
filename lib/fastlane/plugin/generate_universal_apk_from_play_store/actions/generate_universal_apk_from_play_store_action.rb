@@ -32,7 +32,7 @@ module Fastlane
           request = Net::HTTP::Get.new downloadUri.request_uri
           request['Authorization'] = "Bearer #{token} "
           http.request request do |response|
-            open "fastlane/#{params[:version_code]}.apk", 'wb' do |io|
+            open "fastlane/#{params[:file_name]}.apk", 'wb' do |io|
               response.read_body do |chunk|
                 io.write chunk
               end
@@ -68,7 +68,15 @@ module Fastlane
                                        type: String,
                                        verify_block: proc do |value|
                                          UI.user_error!("No version code given") unless value and !value.empty?
-                                       end)                                       
+                                       end),
+          FastlaneCore::ConfigItem.new(key: :file_name,
+                                       env_name: 'FILE_NAME',
+                                       description: 'Downloaded file name',
+                                       optional: false,
+                                       type: String,
+                                       verify_block: proc do |value|
+                                         UI.user_error!("No file name given") unless value and !value.empty?
+                                       end)                                            
         ]
       end
 
